@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded",function(){
         fecha: document.getElementById("fecha")
     }
     DOM.fecha.addEventListener("click", () => {
-        for (let i = 1920 ; i < 2010 ; i++)
+        for (let i = 1920 ; i <= 2010 ; i++)
             {
                 let option = document.createElement("option")
                 option.append(i)
@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded",function(){
             DOM.contraseña.type = "password";
         }
     })
-    DOM.titulo.addEventListener("change", function(){
+    DOM.titulo.addEventListener("input", function(){
         var p = document.getElementById("tit")
         p.innerText = ` ${DOM.titulo.value.length} / 15`
     })
-    DOM.descripcion.addEventListener("change", function(){
+    DOM.descripcion.addEventListener("input", function(){
         var p = document.getElementById("des")
         p.innerText = ` ${DOM.descripcion.value.length} / 120`
     })
@@ -49,11 +49,16 @@ document.addEventListener("DOMContentLoaded",function(){
                 }
             }
     })
-    DOM.form.addEventListener("submit", (a) => {
-        if (!DOM.inputName.validationMessage == ""){
-            a.preventDefault()
-            alert(`Completa el campo ${DOM.inputName.placeholder}`)
-        }
-    })
-
+    //DOM.form.addEventListener("submit", (a) => {
+        // DOM.forEach(item => {
+        //     // if (!DOM.inputName.validationMessage == ""){
+        //     //     a.preventDefault()
+        //     //     alert(`Completa el campo ${DOM.inputName.placeholder}`)
+        //     // }
+        //     if (!item.validationMessage == ""){
+        //         item.preventDefault()
+        //         alert(`Completa el campo ${item.placeholder}`)
+        //     }
+        // });
+   // })
 })
