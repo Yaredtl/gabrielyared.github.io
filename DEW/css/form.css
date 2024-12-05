@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 :root{
     --texto : white
@@ -9,7 +10,21 @@ input:invalid, select:invalid, textarea:invalid{
     border: red 1px solid;
 }
 body{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
     background-color: black;
+    div.estado{
+        grid-column: 2;
+        display: grid;
+        align-self: center;
+        justify-self: center;
+        width: auto;
+        height: auto;
+        background-color: white;
+    }
+    span.error{
+        color: red;
+    }
     .legends{
         border-bottom: 1px white solid;
         width: 100%;
