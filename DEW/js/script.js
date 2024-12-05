@@ -11,10 +11,11 @@ document.addEventListener("DOMContentLoaded",function(){
         boton: document.getElementById("checkpass"),
         contraseña: document.getElementById("password"),
         descripcion: document.getElementById("desc"),
-        botondni: document.getElementById("nif"),
+        inputDni: document.getElementById("nif"),
         selectdni: document.getElementById("selecdni"),
         fecha: document.getElementById("fecha"),
         aficiones: document.getElementById("aficiones"),
+        cuenta: document.getElementById("empresa"),
         //EMPEZAMOS CON LOS SPANS DE ERRORES
         errorUsuario: document.getElementById("errorUsuario"),
         errorContra: document.getElementById("errorContra"),
@@ -50,34 +51,78 @@ document.addEventListener("DOMContentLoaded",function(){
                 DOM.errorUsuario.textContent = campo
                 if (!DOM.inputUsuario.validationMessage == ""){
                     a.preventDefault()
-                    // alert(`Completa el campo ${DOM.inputUsuario.placeholder}`)
                 }
+            }else{
+                DOM.errorUsuario.textContent = ""
             }
         if(DOM.contraseña.value == "")
             {
                 DOM.errorContra.textContent = campo
             }
+            else{
+                DOM.errorContra.textContent = ""
+            }
         if(DOM.inputNombre.value == "")
             {
                 DOM.errorNombre.textContent = campo
+            }else{
+                DOM.errorNombre.textContent = ""
             }
         if(DOM.inputApellidos.value == "")
             {
                 DOM.errorApe.textContent = campo
+            }else{
+                DOM.errorApe.textContent = ""
             }
         if(DOM.inputTel.value == "")
             {
                 DOM.errorTele.textContent = campo
             }
+            else{
+                DOM.errorTele.textContent = ""
+            }
         if(DOM.inputPostal.value == "")
             {
                 DOM.errorCod.textContent = campo
             }
-        //COMENZAMOS VALIDACIONES
+            else{
+                DOM.errorCod.textContent = ""
+            }
+        if(DOM.titulo.value == "")
+            {
+                DOM.errorTitulo.textContent = campo
+            }
+            else{
+                DOM.errorTitulo.textContent = ""
+            }
+        if(DOM.descripcion.value == "")
+            {
+                DOM.errorDesc.textContent = campo
+            }
+            else{
+                DOM.errorDesc.textContent = ""
+            }
+        if(DOM.inputDni.value == "")
+            {
+                DOM.errorDni.textContent = campo
+            }
+            else{
+                DOM.errorDni.textContent = ""
+            }
+        if(DOM.fecha.value == "")
+            {
+                DOM.errorNaci.textContent = campo
+            }
+            else{
+                DOM.errorNaci.textContent = ""
+            }
+        //COMENZAMOS VALIDACIONES TODAS DEBEN ESTAR DEBAJO DEL WHILE PARA QUE SE VAYAN ACTUALIZANDO
+        while(DOM.divestados.firstChild){
+            DOM.divestados.removeChild(DOM.divestados.firstChild)
+        }
         let escondite = document.querySelectorAll("input[required]")
         escondite.forEach(item => 
             {
-                DOM.divestados.removeChild()
                 if(item.validationMessage != "")
                     {
                         a.preventDefault()
@@ -86,18 +131,62 @@ document.addEventListener("DOMContentLoaded",function(){
                         DOM.divestados.append(panaderia)
                     }
             })
-    })
-
-
-
-    DOM.fecha.addEventListener("click", () => {
-        for (let i = 1920 ; i <= 2010 ; i++)
+        if(DOM.fecha.validationMessage != "")
             {
-                let option = document.createElement("option")
-                option.append(i)
-                option.value = i
-                DOM.fecha.append(option)
+                a.preventDefault()
+                let panaderia = document.createElement("span")
+                panaderia.textContent =  `${DOM.fecha.name} = ${DOM.fecha.validationMessage}`
+                DOM.divestados.append(panaderia)
             }
+        if(DOM.descripcion.validationMessage != "")
+            {
+                a.preventDefault()
+                let panaderia = document.createElement("span")
+                panaderia.textContent =  `${DOM.descripcion.name} = ${DOM.descripcion.validationMessage}`
+                DOM.divestados.append(panaderia)
+            }
+        if (elecciones.length < 2)
+            {
+                DOM.errorAfis.textContent = "Debes marcar 2 como minimo"
+                let panaderia = document.createElement("span")
+                panaderia.textContent =  `${escondido.name} = Selecciona al menos dos aficiones`
+                DOM.divestados.append(panaderia)
+                a.preventDefault()
+            }
+        if(elecciones.length >= 2)
+            {
+                DOM.errorAfis.textContent = ""
+            }
+        let fm = document.querySelectorAll('input[type = radio]:checked')
+        if(fm.length < 1)
+            {
+                DOM.errorCuenta.textContent = "Campo obligatorio (necesitas marcar al menos 1)"
+                let panaderia = document.createElement("span")
+                panaderia.textContent =  `${DOM.cuenta.name} = Selecciona al menos un tipo de cuenta`
+                DOM.divestados.append(panaderia)
+                a.preventDefault()
+            }
+            else{
+                DOM.errorCuenta.textContent = ""
+            }
+    })
+    let truquito = 0
+    DOM.fecha.addEventListener("click", () => {
+            {
+                if (truquito == 0)
+                    {
+                        for (let i = 1920 ; i <= 2010 ; i++)
+                            {
+                                let option = document.createElement("option")
+                                option.append(i)
+                                option.value = i
+                                DOM.fecha.append(option)
+                                truquito = 1
+                            }
+                    }
+                
+            }
+        
     })
     DOM.boton.addEventListener("click",function(){
         if (DOM.contraseña.type == "password") {
@@ -118,15 +207,15 @@ document.addEventListener("DOMContentLoaded",function(){
     {
         if(DOM.selectdni.value == "DNI")
             {
-                DOM.botondni.removeAttribute("disabled")
-                DOM.botondni.placeholder = "12345678A"
+                DOM.inputDni.removeAttribute("disabled")
+                DOM.inputDni.placeholder = "12345678A"
             }
             else{
                 if (DOM.selectdni.value == "NIE"){
-                    DOM.botondni.removeAttribute("disabled")
-                    DOM.botondni.placeholder = "X1234567X"
+                    DOM.inputDni.removeAttribute("disabled")
+                    DOM.inputDni.placeholder = "X1234567X"
                 }
             }
     })
-    
+    console.log(DOM.inputDni.value)
 })
