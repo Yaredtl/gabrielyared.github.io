@@ -9,6 +9,12 @@
 input:invalid, select:invalid, textarea:invalid{
     border: red 1px solid;
 }
+input:valid{
+    border: greenyellow 1px solid;
+}
+input:valid + span.error{
+    display: none;
+}
 body{
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -104,6 +110,15 @@ body{
             margin-bottom: 1rem;
             width: 4rem;
             border: 1px black dashed;
+        }
+    }
+    div.estado{
+        color: blue;
+        border: 1px red outset;
+        padding: 1rem;
+        border-radius: 0.2rem;
+        span{
+            margin: 0.2rem;
         }
     }
 }
